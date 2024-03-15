@@ -29,7 +29,7 @@ int main(){
 	{
 		for (int j = 0; j < 5; j++)
 		{
-			map[i][j] = '_';
+			arr[i][j] = '_';
 		}
 	}
     int x,y;

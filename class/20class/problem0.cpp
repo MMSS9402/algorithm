@@ -13,7 +13,7 @@ void run(int lev)
         return;
     }
 
-    for (int i = 01; i <= 4; i++)
+    for (int i = 0; i <= 4; i++)
     {
         path[lev] = '0' + i;
         run(lev + 1);
