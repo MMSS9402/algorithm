@@ -1,29 +1,24 @@
 #include <iostream>
 using namespace std;
-
 char da[15] = "ABFRCBTRV";
-char db[4] = "BTR";
+char db[3] = "BTR";
 
-int isSame(int idx){
-    for(int i =0;i<3;i++){
-        if(db[i] != da[idx+i]) return 0;
+int isSame(int idx)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        if (da[idx + i] == db[i])
+            return 1;
     }
-    return 1;
+    return 0;
 }
 
-
-
-int main(){
-
-    int len = strlen(da);
-
-    for(int i=0;i<len-1;i++){
-        if(isSame(i) == 1){
-            cout << "O";
-            return 0;
-        }
-    }
-    cout << "x";
-
+int main()
+{
+    int ret = isSame(1);
+    if (ret)
+        cout << "O";
+    else
+        cout << "X";
     return 0;
 }
