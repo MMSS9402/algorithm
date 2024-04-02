@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 struct Node
 {
     int x;
@@ -36,5 +35,6 @@ int main()
     {
         cout << p->x;
     }
+
     return 0;
 }
