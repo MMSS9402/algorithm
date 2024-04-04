@@ -11,7 +11,7 @@ int main()
     h.push_back(2);
     h.push_back(3);
 
-    for (auto i = h.begin(); i != h.end(); ++i)
+    for (auto i = h.begin(); i != h.end(); i++)
     {
         cout << *i;
     }
