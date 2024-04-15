@@ -2,45 +2,50 @@
 #include <string>
 using namespace std;
 
-int calculate(string str){
-    int sum = 0;
-    int a =0;
-    int b;
-    int c;
-    while(1){
-        
-        b = str.find('+',a);
-        c = str.find('-',a);
-        if(a==0 && c!=0){
-            int temp = stoi(str);
-            cout << temp << endl;
-            if(b>c) a = c+1;
-            if(c>b) a = b+1;
+string str;
 
+
+int main(){
+    cin >> str;
+    if(str[0]!='-') str.insert(0,"+");
+    int sum = 0;
+
+    int a = 0;
+    int b = 0;
+    while(1){
+        a = str.find('+',a);
+        b = str.find('-',b);
+        // cout << "a" << a << " " << "b" << b << endl;
+        if(a==-1){
+            int temp = stoi(str.substr(b+1,str.length()));
+            // cout << temp << endl;
+            sum-=temp;
+            break;
         }
-        if(b==-1 && c==-1) break;
-        
-        if(b>c || (c != -1 && b==-1)){
-            string temp = str.substr(a-1,c-a);
-            cout << temp << endl;
-            a = c+1;
+        if(b==-1){
+            int temp = stoi(str.substr(a+1,str.length()));
+            // cout << temp << endl;
+            sum+=temp;
+            break;
         }
-        if(c>b || (b!=-1 && c==-1)){
-            cout << "X";
-            string temp = str.substr(a-1,b-a);
-            cout << temp << endl;
-            a = b+1;
+        if(a<b){
+            
+            int temp = stoi(str.substr(a+1,str.length()));
+            // cout << temp << endl;
+            sum+=temp;
+            a +=1;
+        }
+
+        if(b<a){
+            int temp = stoi(str.substr(b+1,str.length()));
+            // cout << temp << endl;
+            sum-=temp;
+            b+=1;
         }
 
     }
-    return sum;
-}
-// 7 10
-int main(){
 
-    string str = "100+100-50+30";
-    int arr[1000];
-    int sum = calculate(str);
+    cout << sum;
 
     return 0;
 }
