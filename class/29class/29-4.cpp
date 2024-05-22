@@ -1,29 +1,42 @@
 #include <iostream>
-#include <string>
 #include <vector>
+#include <string>
 using namespace std;
-
-string name = "KGZHIR";
 
 vector<vector<int>> alist(3);
 
+int used[3];
+
+int cnt;
 void run(int now)
 {
-    cout << name[now];
+    if (now == 2)
+    {
+        cnt++;
+        return;
+    }
     for (int i = 0; i < alist[now].size(); i++)
     {
-        // cout << name[alist[now][i]];
         int next = alist[now][i];
+        if (used[next] == 1)
+            continue;
+        used[next] = 1;
         run(next);
+        used[next] = 0;
     }
 }
 
 int main()
 {
-    alist[0] = {1, 2};
-    alist[1] = {3, 4};
-    alist[2] = {5};
 
+    alist[0] = {1, 2};
+    alist[1] = {2};
+    alist[2] = {0};
+
+    used[0] = 1;
     run(0);
+
+    cout << cnt << "개";
+
     return 0;
 }
