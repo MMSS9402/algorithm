@@ -1,47 +1,25 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 using namespace std;
 
-int map[5][5] = {
-    0,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-};
+queue<int> q;
 
 int main()
 {
-    char x;
-    cin >> x;
-    int k = x - 65;
+    q.push(5);
+    q.push(4);
+    q.push(3);
+
+    int x = 0;
 
     for (int i = 0; i < 5; i++)
     {
-        if (map[k][i] == 0)
-            continue;
-        cout << char(i + 65);
+        x = q.front();
+        q.pop();
+        x = x * 55 + 17 % 11;
+        q.push(x);
     }
 
     return 0;

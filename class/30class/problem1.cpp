@@ -1,40 +1,33 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 using namespace std;
 
-string name = "BTAR";
-int used[4];
-int map[4][4] = {
-    0,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    1,
-    1,
-    0,
-    0,
-    1,
-    1,
-    0,
-    0,
+struct Node
+{
+    char ch;
+    int n;
 };
+
+queue<Node> q;
 
 int main()
 {
 
-    int n;
-    cin >> n;
+    q.push({'A', 9});
+    q.push({'B', 7});
+    q.push({'Q', 5});
+    q.push({'T', 4});
 
-    for (int i = 0; i < 4; i++)
+    while (!q.empty())
     {
-        if (map[n][i] == 0)
-            continue;
-        cout << name[i];
+
+        Node ret = q.front();
+        cout << ret.ch << " " << ret.n << "\n";
+        // q.front()가 구조체 덩어리를 의미함!
+        cout << q.front().ch;
+        q.pop();
     }
 
     return 0;
