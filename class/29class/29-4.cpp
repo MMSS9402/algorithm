@@ -3,11 +3,11 @@
 #include <string>
 using namespace std;
 
-vector<vector<int>> alist(3);
+vector< vector<int> > alist(3);
 
 int used[3];
 
-int cnt;
+int cnt=0;
 void run(int now)
 {
     if (now == 2)
