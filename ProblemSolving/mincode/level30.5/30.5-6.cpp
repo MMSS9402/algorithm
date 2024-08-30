@@ -2,32 +2,47 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <cstring>
 using namespace std;
 int n;
-char arr[10][10];
-char path[10];
+char path[5];
+char temp[5];
+int arr[3];
+int cnt = 0;
 
-void run(string str, int lev)
+void run(int lev, int idx)
 {
-    if (lev == n)
+    if (strcmp(temp, path) == 0)
     {
+        arr[idx] = cnt + 1;
+        return;
+    }
+    if (lev == 4)
+    {
+        cnt++;
+        return;
+    }
+    for (int i = 'A'; i <= 'Z'; i++)
+    {
+        path[lev] = char(i);
+        run(lev + 1, idx);
+        path[lev] = 0;
     }
 }
 
 int main()
 {
     cin >> n;
-
-    char arr[10][10];
-
+    // cout << int('A') << " " << int('Z');
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
+        cnt = 0;
+        cin >> temp;
+        run(0, i);
     }
-
-    for (int i = 0; i < arr.length(); i++)
+    for (int i = 0; i < n; i++)
     {
-        run(arr[i], 0);
+        cout << arr[i] << endl;
     }
 
     return 0;
