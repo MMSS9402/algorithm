@@ -34,7 +34,7 @@ int main()
 
     for (int i = 0; i < 3; i++)
     {
-        printf("%lf", result[i]);
+        printf("%.1lf", result[i]); // 소수점 자리 개수 표시 가능!!
         cout << result[i] << endl;
     }
 }
