@@ -4,32 +4,30 @@
 #include <queue>
 using namespace std;
 
-vector<int> s = {1, 5, 4, 2, -5, -7};
+int arr[6] = {1,5,4,2,-5,-7};
+vector<int> s;
 
-int main()
-{
+int main(){
     int n;
     cin >> n;
 
-    for (int i = 1; i <= 6; i++)
-    {
-        int maxIdx = -1;
-        int max = -1;
-        for (int j = 0; j < s.size(); j++)
-        {
-            if (s[j] > max)
-            {
-                max = s[j];
-                maxIdx = j;
+    int min = 999;
+    int k = 0;
+    while(k<=6){
+        for(int i=0;i<6;i++){
+            if(arr[i]<min){
+                min = arr[i];
             }
         }
-        s.erase(s.begin() + maxIdx);
-
-        if (i == n)
-        {
-            cout << max;
-            break;
-        }
+        s.push_back(min);
+        k++;
+        min = 999;
     }
+    for(int i=0;i<s.size();i++){
+        cout << s[i];
+    }
+
+
+
     return 0;
 }

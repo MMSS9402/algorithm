@@ -49,7 +49,7 @@ int main(){
             }
         }
         flag = check(arr1,arr2);
-        cout << "flag:" << flag << endl;
+        // cout << "flag:" << flag << endl;
         if(flag){
             flag = 0;
         } 
