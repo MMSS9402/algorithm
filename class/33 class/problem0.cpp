@@ -13,6 +13,7 @@ int find(int n){
     }
 
     int ret = find(myBoss[n]);
+    // 돌아오면서 최종 보스 값으로 수정 => 성능 향상!(경로압축이라고 부름!)
     myBoss[n] = ret;
     return ret;
 }
