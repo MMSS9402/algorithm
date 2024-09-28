@@ -11,7 +11,7 @@ int main(){
     int start = 1;
     int end = 50;
 
-    while(1){
+    while(start <= end){
         int mid = (start+end) / 2;
         if(mid == target){
             cout << "짝짝 한잔";
@@ -25,6 +25,8 @@ int main(){
         }
         
     }
+
+    cout << mid;
 
     return 0;
 }

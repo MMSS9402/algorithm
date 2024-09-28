@@ -18,11 +18,7 @@ int main(){
         q.pop();
     }
 
-    //push -> 4logN
-    cout << q.top();
 
-    q.pop();
-
-    cout << q.top();
+    //힙소트는 O(NlogN)
     return 0;
 }
