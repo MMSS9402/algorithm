@@ -16,7 +16,7 @@ struct Node{
 
 priority_queue<Node> q;
 
-int operator<(Node v, Node t){
+bool operator<(Node v, Node t){
     if(t.ch<v.ch) return 1;
     if(t.ch>v.ch) return 0;
 

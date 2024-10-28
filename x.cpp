@@ -1,35 +1,21 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include <queue>
 using namespace std;
 
-queue<int> q;
-vector<vector<int>> v(7);
+int main(){
 
-int main()
-{
-    // 인접리스트 초기화
-    v[5] = {3, 1};
-    v[3] = {2};
-    v[1] = {4};
-    v[4] = {0, 6};
+    string str1 = "ABABABACABBAABBC";
+    string str2 = "AB";
 
-    q.push(5);
-
-    while (!q.empty())
-    {
-        // 1. 큐에 뺀다(탐색)
-        int now = q.front();
-        q.pop();
-        cout << now << " ";
-
-        // 2. 다음 갈 곳 예약걸기(큐 등록)
-        for (int i = 0; i < v[now].size(); i++)
-        {
-            int next = v[now][i];
-            q.push(next);
-        }
+    int a = -1;
+    int cnt = 0;
+    while(1){
+        a = str1.find(str2,a+1);
+        cout  << a << endl;
+        if(a == -1) break;
+        cnt++;
     }
+    cout << cnt;
+
     return 0;
 }

@@ -1,60 +1,44 @@
 #include <iostream>
 #include <queue>
-#include <algorithm>
-#include <vector>
+#define ll long long
 using namespace std;
-struct Node{
-    int n;
-    int price;
-};
+priority_queue<ll, vector<ll>, greater<ll>> q;
 
-vector<vector<Node>> alist(6);
-priority_queue<Node> q;
-int result[6];
-bool operator<(Node v, Node t){
-    return t.price < v.price;
-}
+ll result[1600];
 
-void init(){
-    for(int i=0;i<6;i++) result[i] = 21e8;
-    result[0] = 0;
-    alist[0] ={{1,5},{2,10},{3,7}};
-    alist[1] = {{0,5},{5,9}};
-    alist[2] = {{5,1}};
-    alist[3] = {{4,1}};
-    alist[4] = {{5,6}};
+int main()
+{
+	q.push(1);
 
-    //출발지점
-    q.push({0,0});
-}
+	int cnt = 0;
+	ll now = 0;
+	ll old = -1;
 
+	//1 ~ 1500 등까지 정답 미리 구해두기
+	while (1)
+	{
+		now = q.top();
+		q.pop();
+		if (old == now) continue;
+		old = now;
 
-int main(){
+		cnt++;
+		result[cnt] = now;
+		if (cnt == 1500) break;
 
-    init();
+		q.push(now * 2);
+		q.push(now * 3);
+		q.push(now * 5);
+	}
 
-    while(!q.empty()){
-        Node now = q.top();
-        q.pop();
+	int n;
+	cin >> n;
 
-        //1. 최신데이터인지 아닌지 확인
-        if(result[now.n]<now.price) continue;
+	for (int i = 0; i < n; i++) {
+		int tar;
+		cin >> tar;
+		cout << result[tar] << " ";
+	}
 
-        //2. 다음 갈 수 있는 곳 찾기
-        for(int i=0;i<alist[now.n].size();i++){
-            Node next = alist[now.n][i];
-            int priceSum = now.price+next.price;
-            if(result[next.n] > priceSum){
-                result[next.n] = priceSum;
-                q.push({next.n,priceSum});
-            }
-        }
-
-    }
-
-    for(int i=0;i<6;i++){
-        cout << i << " " << result[i] << endl;
-    }
-
-    return 0;
+	return 0;
 }
