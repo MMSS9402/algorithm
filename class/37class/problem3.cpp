@@ -12,14 +12,13 @@ int direct[4][2]={
     0,-1
 };
 
-int map[5][5] = {
-    0,0,1,1,1,
-    1,0,0,0,1,
-    1,1,1,0,1,
-    0,0,0,0,1,
-    1,0,1,0,0
+int map[4][5] = {
+    1,1,0,0,1,
+    1,0,1,1,0,
+    0,0,1,0,0,
+    1,1,1,1,0
 };
-int used[5][5];
+int used[4][5];
 queue<Node> q;
 
 int main(){
@@ -28,7 +27,7 @@ int main(){
     cin >> o >> p;
     q.push({o,p});
     used[o][p] = 1;
-    map[o][p] = 0;
+    int cnt = 1;
 
     while(!q.empty()){
         Node now = q.front();
@@ -36,17 +35,15 @@ int main(){
         for(int t=0;t<4;t++){
             int dx = now.x + direct[t][0];
             int dy = now.y + direct[t][1];
-            if(dx<0||dy<0||dx>=5||dy>=5) continue;
-            if(map[dx][dy] != 0) continue;
+            if(dx<0||dy<0||dx>=4||dy>=5) continue;
+            if(map[dx][dy] == 0) continue;
             if(used[dx][dy] == 1) continue;
             used[dx][dy] = 1;
-            map[dx][dy] = map[now.x][now.y] + 1;
             q.push({dx,dy});
+            cnt++;
         }
     }
-    int e,r;
-    cin >> e >> r;
-    cout << map[e][r] << endl;
+    cout << cnt << endl;
     // for(int i=0;i<5;i++){
     //     for(int j=0;j<5;j++){
     //         cout << map[i][j] << " ";
