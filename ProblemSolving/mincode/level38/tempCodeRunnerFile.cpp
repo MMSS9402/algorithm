@@ -22,7 +22,7 @@ queue<Node> q;
 
 int bfs(int x,int y, int tgt){
     int type = map[x][y];
-    // cout << "type : " << type << endl; 
+    cout << "type : " << type << endl; 
     while(!q.empty()) q.pop();
     memset(result,0,7*7*sizeof(int));
     memset(used,0,7*7*sizeof(int));
