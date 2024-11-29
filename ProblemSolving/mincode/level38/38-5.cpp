@@ -1,65 +1,100 @@
 #include <iostream>
 #include <queue>
-#include <cstring>
 using namespace std;
-
-int n;
-char map[5][5];
-struct Node{
-    int x,y;
+struct Node 
+{
+    int elsax;
+    int elsay;
+    int annax;
+    int annay;
     int lev;
 };
 
-queue<Node> q1;
-queue<Node> q2;
-int direct1[4][2] = {
+
+int n;
+char map[6][6];
+int result[5][5];
+int used[5][5];
+
+int direct1[8][2] = {
     0,1,
+    1,0,
+    0,-1
+    -1,0,
+    1,1,
+    -1,-1,
+    1,-1,
+    -1,1
+};
+int direct2[5][2] = {
+    0,0,
     0,-1,
+    0,1,
     1,0,
     -1,0
 };
-int direct2[4][2]={
-    1,1,
-    1,-1,
-    -1,1,
-    -1,-1,
-};
-int main(){
-    cin >> n;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<5;j++){
-            cin >> map[i][j];
+queue<Node> q;
+
+int bfs(){
+    while(!q.empty()){
+        Node now = q.front();
+        q.pop();
+        int len = 8;
+        int scalex = now.annax - now.elsax;
+        int scaley = now.annay - now.elsay;
+        if(scalex < 0) scalex = -scalex;
+        if(scaley < 0) scaley = -scaley;
+        if(scalex<2 || scaley<2){
+            len = 4;
         }
-    }
+        used[now.annax][now.annay] = 1;
+        used[now.elsax][now.elsay] = 1;
+        for(int i=0;i<5;i++){
+            int adx = now.annax + direct2[i][0];
+            int ady = now.annay + direct2[i][1];
+            
+            if(adx<0||ady<0||adx>=n||ady>=n) continue;
+            if(used[adx][ady] !=0) continue;
+            if(map[adx][ady] == '#') continue;
+            used[adx][ady] = 1;
+            for(int j=0;j<len;j++){
+                // cout << "scale :" << scalex << " " << scaley << endl;
+                int edx = now.elsax + direct1[j][0];
+                int edy = now.elsay + direct1[j][1];
+                if(edx<0||edy<0||edx>=n||edy>=n) continue;
+                if(used[edx][edy] !=0 ) continue;
+                if(map[edx][edy] == '#') continue;
+                used[edx][edy] = 1;
+                q.push({adx,ady,edx,edy,now.lev+1});
+                if(adx == edx && ady == adx) {
+                    return now.lev+1;
+                }
 
-    int x1,y1;
-    int x2,y2;
-    cin >> x1 >> y1;
-    cin >> x2 >> y2;
 
-    q1.push({x1,y1,0});
-    q2.push({x2,y2,0});
-    while(!q1.empty()){
-        Node elsa = q1.front();
-        Node anna = q2.front();
-        q1.pop();
-        q2.pop();
-        int xscale = elsa.x - anna.x;
-        int yscale = elsa.y - anna.y;
-        if(xscale<0) xscale = - xscale;
-        if(yscale<0) yscale = -yscale;
-        if(xscale>=3 || yscale>=3) {
-            for(int t=0;t<4;t++){
-                int edx = elsa.x + direct2[t][0];
-                int edy = elsa.y + direct2[t][1];
-                int adx = anna.x + direct1[t][0];
-                int ady = anna.y + direct1[t][1];
+
             }
         }
-        
     }
+    return -1;
 
-    
+}
+
+
+int main(){
+
+    cin >> n;
+    // n = n-1;
+
+    for(int i=0;i<n;i++){
+        cin >> map[i];
+    }   
+
+    int x1,y1,x2,y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+    q.push({x1,y1,x2,y2,0});
+
+    int ret = bfs();
+
 
 
     return 0;

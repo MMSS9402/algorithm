@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include <cstring>
 using namespace std;
 
 char map[8][9];
