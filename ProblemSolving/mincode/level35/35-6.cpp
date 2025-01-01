@@ -1,41 +1,53 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 #include <queue>
 using namespace std;
 
-vector<int> v;
+priority_queue<int> lheap;                            // max heap
+priority_queue<int, vector<int>, greater<int>> rheap; // min heap
+int mid;
 
-int compare(int t, int v){
-    // if(t<v) return 1;
-    // if(t>v) return 0;
-    return t<v;
+void push(int v)
+{
+    if (mid > v)
+        lheap.push(v);
+    else
+        rheap.push(v);
 }
 
-int main(){
+int main()
+{
     ios_base::sync_with_stdio(false);
     cout.tie(0);
     cin.tie(0);
-    int tgt = 500;
-    int start = 0;
-    int end = 0;
-    v.push_back(tgt);
+
+    mid = 500;
 
     int n;
-    cin >> n;
+    int a, b;
 
-    for(int i=0;i<n;i++){
-        int a,b;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
         cin >> a >> b;
-        v.push_back(a);
-        v.push_back(b);
-        end = v.size();
-        sort(v.begin(),v.end(),compare);
-        int mid = (start+end)/2;
-        cout << v[mid] << endl;
+
+        push(a);
+        push(b);
+
+        if (lheap.size() > rheap.size())
+        {
+            rheap.push(mid);
+            mid = lheap.top();
+            lheap.pop();
+        }
+        else if (lheap.size() < rheap.size())
+        {
+            lheap.push(mid);
+            mid = rheap.top();
+            rheap.pop();
+        }
+
+        cout << mid << "\n";
     }
 
     return 0;
 }
-
