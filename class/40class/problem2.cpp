@@ -38,6 +38,7 @@ int main(){
             }
         }
     }
+    
     int maxi = 0;
     for(int i=0;i<3;i++){
         maxi = max(maxi,dp[i][8]);

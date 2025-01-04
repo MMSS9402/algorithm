@@ -51,17 +51,26 @@ int main(){
         }
     }
 
-
-    cout << acc[0][0]<< endl;
-
-    int nx = 0;
-    int ny = 0;
-    while(1){
-        cout << nx << "," << ny << "\n";
-        if(bang[nx][ny] == RIGHT) ny++;
-        else if (bang[nx][ny] == DOWN) nx++;
-        else if (bang[nx][ny] == NONE) break;
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+            cout << acc[i][j] << " ";
+        }
+        cout << endl;
     }
+
+
+    // cout << acc[0][0]<< endl;
+
+    // int nx = 0;
+    // int ny = 0;
+    // while(1){
+    //     cout << nx << "," << ny << "\n";
+    //     if(bang[nx][ny] == RIGHT) ny++;
+    //     else if (bang[nx][ny] == DOWN) nx++;
+    //     else if (bang[nx][ny] == NONE) break;
+    // }
+
+
 
    
 
