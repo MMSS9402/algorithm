@@ -18,7 +18,7 @@ void init(){
 int main(){
     init();
 
-    for(int i=2;i<13;i++){
+    for(int i=2;i<100;i++){
         int sum1 = dp[i-2];
         int sum2 = -999;
         if(i>=3){
@@ -33,11 +33,12 @@ int main(){
         dp[i] = maxi + arr[i];
 
     }
-    for(int i=0;i<13;i++){
-        cout << dp[i] << " ";
+
+    int maxi = -999;
+    for(int i=12;i<100;i++){
+        maxi = max(maxi,dp[i]);
     }
-    cout << endl;
-    cout << dp[12];
+    cout << maxi;
 
     
 

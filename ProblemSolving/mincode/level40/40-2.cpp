@@ -15,7 +15,10 @@ int main(){
         for(int j=0;j<=n/2;j++){
             if(i+2*j == n){
                 cout << i << " " << j << endl;
-                count++;
+                if(i==0||j==0) count++;
+                else{
+                    for(int a=i+j;a>0)
+                }
             }
         }
     }

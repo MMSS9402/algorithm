@@ -1,14 +1,10 @@
 #include <iostream>
 using namespace std;
 
-int myBoss[10];
 
-int find(int n){
-    
-}
 
 int main(){
-
+    cout << int('0') << " " << int('F');
 
 
     return 0;
