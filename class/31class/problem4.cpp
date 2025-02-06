@@ -3,48 +3,31 @@
 #include <string>
 using namespace std;
 
-vector<int> arr = {4, 5, 6, 1, 1, 3, 2, 6, 9, 1, 1, 2, 0, 3, 2};
+string str = "BAQRRGGVAQZAACT";
 
-int isSeven(int size)
-{
-    int sum = 0;
-    for (int i = 0; i < size; i++)
-    {
-        sum += arr[i];
-    }
-    int limit = arr.size() - size;
-    for (int i = 0; i <= limit; i++)
-    {
-        if (sum == 7)
-        {
-            return 1;
-        }
-        if (i == limit)
-            break;
-        sum -= arr[i];
-        sum += arr[i + size];
-    }
-    return 0;
-}
+int main(){
 
-void go()
-{
-    for (int i = arr.size(); i >= 0; i--)
-    {
-        int ret = isSeven(i);
-        if (ret == 1)
-        {
-            cout << i;
-            return;
+    string temp = str.substr(0,5);
+    int dat[200] = {0};
+    int max = -99;
+    char maxIdx;
+    for(int i=0;i<5;i++){
+        dat[temp[i]]++;
+        if(dat[temp[i]]>max){
+            maxIdx = temp[i];
+            max = dat[i];
         }
     }
-    cout << "없음";
-}
 
-int main()
-{
-
-    go();
+    for(int i=0;i<=str.length()-5;i++){
+        dat[str[i]]--;
+        dat[str[i+5]]++;
+        if(dat[str[i+5]]>max){
+            maxIdx = str[i+5];
+            max = dat[str[i+5]];
+        }
+    }
+    cout << maxIdx << " :" << max;
 
     return 0;
 }

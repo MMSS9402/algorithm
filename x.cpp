@@ -1,29 +1,57 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
-char arr[11] = {'#','#','#','#','#','#','#','_','_','_'};
+struct Node{
+    int n;
+    int b1,b2,b3,b4,b5;
+};
+queue<Node> q;
 
-int bs(int start,int end){
-    int maxIdx = 0;
-    while(start<=end){
-        int mid = (start+end)/2;
-        if(arr[mid] == '#'){
-            if(maxIdx<mid) maxIdx = mid;
-            start = mid+1;
-        }
-        if(arr[mid] == '_'){
-            end = mid-1;
+
+void bfs(int tgt){
+    int b1 = 0;
+    b1 += tgt/60;
+    tgt = tgt%60;
+    // int b2 = 0;
+    // b2 += tgt/10;
+    // tgt = tgt&10;
+
+    q.push({0,b1,0,0,0,0});
+    
+    while(!q.empty()){
+        Node now = q.front();
+        q.pop();
+        if(now.n==tgt){
+            cout << now.b1 <<" " <<  now.b2 << " " << now.b3<< " " << now.b4 << " " << now.b5;
+            break;
         }
 
+        if(now.n<0){
+            continue;
         }
-        return maxIdx;
+        q.push({now.n+60,now.b1+1,now.b2,now.b3,now.b4,now.b5});
+        q.push({now.n+10,now.b1,now.b2+1,now.b3,now.b4,now.b5});
+        q.push({now.n-10,now.b1,now.b2,now.b3+1,now.b4,now.b5});
+        q.push({now.n+1,now.b1,now.b2,now.b3,now.b4+1,now.b5});
+        q.push({now.n-1,now.b1,now.b2,now.b3,now.b4,now.b5+1});
+
+    }
+
+
 }
 
+
+
 int main(){
+    int tgt;
 
-    int ret = bs(0,10);
-    cout << ret+1;
 
+    cin >> tgt;
+
+    bfs(tgt);
+
+    
 
     return 0;
 }
