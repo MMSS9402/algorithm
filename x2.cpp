@@ -1,39 +1,39 @@
 #include <iostream>
-#include <queue>
+#include <string>
 #include <vector>
-#include <algorithm>
-// #define MAX 21e8 // c언어 스타일
+#include <queue>
 using namespace std;
-struct Node
-{
-    int n;
-    int price;
-};
-vector<vector<Node>> alist(4);
-const int MAXI = 21e8; // c++ 스타일
-int result[4] = {0, MAXI, MAXI, MAXI};
 
-bool operator<(Node v, Node t)
-{
-    return t.n < v.n;
+vector<vector<int>> v(101);
+int cnt = 0;
+
+int used[101];
+
+void run(int now){
+    for(int i=0;i<v[now].size();i++){
+        int next = v[now][i];
+        if(used[next]!=1){
+            used[next]=1;
+            run(next);
+            cnt ++;
+        }
+    }
 }
 
-priority_queue<Node> q;
+int main(){
 
-int main()
-{
-
-    q.push({0, 0});
-    q.push({5, 20});
-    q.push({2, 20});
-    q.push({3, 20});
-    q.push({4, 20});
-
-    while (!q.empty())
-    {
-        cout << q.top().n << endl;
-        q.pop();
+    int n;
+    int t;
+    cin >> n >> t;
+    for(int i=0;i<t;i++){
+        int x,y;
+        cin >> x >> y;
+        v[x].push_back(y);
+        v[y].push_back(x);
     }
+    used[1] = 1;
+    run(1);
+    cout << cnt;
 
     return 0;
 }

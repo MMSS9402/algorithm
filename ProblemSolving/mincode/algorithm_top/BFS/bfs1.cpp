@@ -5,35 +5,35 @@
 #include <queue>
 using namespace std;
 
-int map[10][10];
+int map[11][11];
+int used[11];
 int n;
 
-void bfs(int start){
+void bfs(int now){
     queue<int> q;
-    q.push(start);
-    int used[10]={0};
-    used[start] = 1;
-
+    q.push(now);
+    
+    used[now] = 1;
+    
     while(!q.empty()){
         int now = q.front();
-        q.pop();
-
         cout << now << " ";
-
+        q.pop();
         for(int i=0;i<n;i++){
-            if(map[now][i] == 0) continue;
-            // cout << now << ',' << i << " " << map[now][i] << " " << '\n';
+            if(map[now][i] != 1) continue;
             if(used[i] == 1) continue;
             used[i] = 1;
-            // cout << now << ',' << i << " " << map[now][i] << " " << '\n';
             q.push(i);
         }
+
     }
 }
 
 int main(){
 
+    
     cin >> n;
+
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
             cin >> map[i][j];
@@ -42,6 +42,8 @@ int main(){
 
     bfs(0);
 
+
+    
 
     return 0;
 }

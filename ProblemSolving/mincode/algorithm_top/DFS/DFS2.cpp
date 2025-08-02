@@ -4,63 +4,74 @@
 #include <algorithm>
 using namespace std;
 
-vector<vector<int>> v(102);
-int used[102];
-int n,p;
-int maxi = 0;
-// vector<int> result;
-void run(int now){
-    // result.push_back(now);
-    if(now>maxi) maxi = now;
-    cout << now << " ";
-    for(int i=0;i<v[now].size();i++){
-        int next = v[now][i];
-        if(used[next] == 1) continue;
-        used[next] = 1;
-        run(next);
-    }
-}
-void run2(int now){
-    for(int i=0;i<v[now].size();i++){
-        int next = v[now][i];
-        if(used[next] == 1) continue;
-        used[next] = 1;
-        run2(next);
-    }
-    cout << now << " ";
+vector<vector<int>> v(101);
+int used[101];
+int used2[101];
 
-}
-void init(){
-    for(int i=1;i<=n;i++){
-        used[i] = 0;
+vector<int> result;
+vector<int> result2;
+
+void run(int now){
+
+    sort(v[now].rbegin(),v[now].rend());
+    
+    for(int i=0;i<v[now].size();i++){
+        int next = v[now][i];
+        if(used[next] == 1) continue;
+        used[next] = 1;
+        
+        run(next);
+        
     }
+    result.push_back(now);
+}
+
+void run2(int now){
+    sort(v[now].rbegin(),v[now].rend());
+    result2.push_back(now);
+    for(int i=0;i<v[now].size();i++){
+        int next = v[now][i];
+        if(used2[next] == 1) continue;
+        used2[next] = 1;
+        
+        run2(next);
+        
+    }
+    
 }
 
 int main(){
 
-    cin >> n >> p;
+    int n,k;
+    cin >> n >> k;
+
     int s;
     cin >> s;
-    for(int i=0;i<p;i++){
+
+    for(int i=0;i<k;i++){
         int x,y;
         cin >> x >> y;
         v[x].push_back(y);
-        v[y].push_back(x);
     }
-    for(int i=1;i<=n;i++){
-        sort(v[i].begin(),v[i].end(),greater<int>());
-    }
-
     used[s] = 1;
-    run(s);
+    // result.push_back(s);
+    run(s); 
 
-    init();
 
-    cout << '\n';
     
-    used[s] = 1;
+
+
+    used2[s] = 1;
     run2(s);
-    
+
+    for(int i=0;i<result2.size();i++){
+        cout << result2[i] << " ";
+    }
+    cout << endl;
+
+    for(int i=0;i<result.size();i++){
+        cout << result[i] << " ";
+    }
 
     return 0;
 }

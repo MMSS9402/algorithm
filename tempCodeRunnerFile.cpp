@@ -1,32 +1,52 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
 using namespace std;
 
-int path[3];
+int n,m,k;
 
-void run(int lev,int sum){
-    // if(lev>0 && path[1] == 2) return; 
-    if(lev == 3){
-        for(int i=0;i<3;i++){
-            cout << path[i];
+struct Node{
+    int n;
+    int price;
+};
+vector<vector<Node>> v(11);
+int used[11];
+
+
+queue<Node> q;
+void bfs(int start){
+    used[start] = 1;
+    q.push({start,0});
+
+    while(!q.empty()){
+        Node now = q.front();
+        q.pop();
+
+        if(now.price<=k){
+            cout << now.n << " ";
         }
-        cout << " = " << sum;
-        cout << endl;
-        return;
-    }
 
-    for(int i=1;i<=6;i++){
-        if(lev==1 && i ==2) continue;;
-        path[lev] = i;
-        run(lev+1,sum+path[lev]);
-        path[lev]= 0;
-
+        for(int i=0;i<v[now.n].size();i++){
+            Node next = v[now.n][i];
+            if(used[i] == 1) continue;
+            used[i] = 1;
+            q.push({next,now.price+next.price});
+        }
     }
 }
 
 
-int main(){
 
-    run(0,0);
+int main(){
+    cin >> n >> m >> k;
+
+    for(int i=0;i<m;i++){
+        int a,b,price;
+        cin >> a >> b >> price;
+        v[a].push_back({b,price});
+    }
+    bfs(0);
 
     return 0;
 }
