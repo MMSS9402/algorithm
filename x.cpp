@@ -1,22 +1,21 @@
 #include <iostream>
+
 using namespace std;
 
 
 int main(){
+	const int num_students = 5;
+	int scores[num_students] = {84,92,76,81,56};
 
-	int x;
-	cin >> x;
-	if(x>0){
+	int max_score = -1;
 
-		if(x>10){
-			cout << x << " is greater than 10" << endl;
-		}
-		else if(x<10){
-			cout << x << " is less than 10" << endl;
-		}
-		else{ // if(x == 10)
-			cout << "x is exactly 10"
+	for(int i=0;i<num_students; i++){
+		total_score += scores[i];
+		if(max_score<scores[i]){
+			max_score = scores[i];
 		}
 	}
+	cout << max_score;	
+
 	return 0;	
 }

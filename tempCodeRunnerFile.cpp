@@ -1,52 +1,32 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <queue>
+
 using namespace std;
 
-int n,m,k;
+void doSomething(int arr[20]){
+	cout << (long long)&(arr)<< endl;
+	cout << arr[1]<< endl;
+	cout << arr[2]<< endl;
 
-struct Node{
-    int n;
-    int price;
-};
-vector<vector<Node>> v(11);
-int used[11];
+	cout << "size in doSometing function : " << sizeof(arr) << endl; 
 
-
-queue<Node> q;
-void bfs(int start){
-    used[start] = 1;
-    q.push({start,0});
-
-    while(!q.empty()){
-        Node now = q.front();
-        q.pop();
-
-        if(now.price<=k){
-            cout << now.n << " ";
-        }
-
-        for(int i=0;i<v[now.n].size();i++){
-            Node next = v[now.n][i];
-            if(used[i] == 1) continue;
-            used[i] = 1;
-            q.push({next,now.price+next.price});
-        }
-    }
-}
-
-
+ }
 
 int main(){
-    cin >> n >> m >> k;
 
-    for(int i=0;i<m;i++){
-        int a,b,price;
-        cin >> a >> b >> price;
-        v[a].push_back({b,price});
-    }
-    bfs(0);
+	int students_scores[20] = {1,2,3,4,5,};
 
-    return 0;
+	cout << (long long)students_scores << endl;
+	cout << (long long)&students_scores << endl;
+	cout << (long long)&(students_scores[0]) << endl;
+	cout << (long long)&(students_scores[1]) << endl;
+	cout << (long long)&(students_scores[2]) << endl;
+	cout << (long long)&(students_scores[3]) << endl;
+
+
+
+	cout <<sizeof(students_scores)<< endl;
+
+	doSomething(students_scores);
+
+	return 0;	
 }
